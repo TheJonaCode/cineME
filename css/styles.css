@@ -3,8 +3,19 @@ body {
     background-color: #0b132b;
 }
 
+/* SVG */
+.svg-space{
+    margin-top: 10%;
+    margin-left: 1%;
+    width: 98%;
+    height: 500px;
+    background-color: #fff;
+}
+
 .mysvg{
-    fill: #6fffe9 !important;
+    width: 100%;
+    height: 600px;
+    background-color:#57cc99;
 }
 
 /*INDEX - GET FILE*/

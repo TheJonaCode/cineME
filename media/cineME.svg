@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cineME</title>
-    <!--STYLES CSS-->
-    <link rel="stylesheet" href="./css/styles.css">
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <!--Fuentes-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i" rel="stylesheet">
-</head>
-
-<body style="background-color: #0b132b;">
-    <!--SVG-->
-	<svg class="svg-space">
-		<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 27.7.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 595.28 841.89" style="enable-background:new 0 0 595.28 841.89;" xml:space="preserve">
@@ -36,7 +17,7 @@
 	.st11{fill:#FFDE00;stroke:#FFDE00;stroke-width:2;stroke-miterlimit:10;}
 	.st12{fill:#FFFFFF;}
 	.st13{font-family:'ErasITC-Bold';}
-	.st14{font-size:14px;}
+	.st14{font-size:16px;}
 	.st15{font-size:40px;}
 </style>
 <g id="BG">
@@ -655,26 +636,3 @@ Wdu2/Q/qe0UwblRCuQAAAABJRU5ErkJggg==" transform="matrix(0.24 0 0 0.24 43.56 51.3
 	<text transform="matrix(1 0 0 1 224.251 39.2796)" class="st12 st13 st15">cineME</text>
 </g>
 </svg>
-
-	</svg>
-
-    <div class="footer">
-        <p class="footer__description">
-            cineME 2023
-            <br>
-            All Rights Reserved
-        </p>
-    </div>
-
-    <!--SCRIPTS JS-->
-    <!--JQuery-->
-    <script src="./js/jquery-3.5.1.slim.min.js"></script>
-    <!--Bootstrap-->
-    <script src="./js/bootstrap.bundle.js"></script>
-    <!-- SheetJS -->
-    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-    <!--Script-->
-    <script language="JavaScript" type="text/javascript" src="./js/home-script.js"></script>
-</body>
-
-</html>

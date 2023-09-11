@@ -10,10 +10,47 @@ $(document).ready(function() {
     
           
     // ----- DOM ELEMENTS
-
+    //Title cineME
+    const cinemeTitle = document.querySelector(".cineme-title"); //Title
 
     // ----- SHOWING INFO
+    //Recorriendo JSON + Fetch de cada película
+    async function fetchMoviesData() {
+      const movies = moviesJSON;
+      const movieDataArray = [];
+    
+      for (const movie of movies) {
+        const movieTitle = movie.Name;
+        const movieData = await fetchMovie(movieTitle);
+        
+        if (movieData) {
+          movieDataArray.push(movieData);
+        }
+      }
+    
+      return movieDataArray;
+    }
+    
+    // Llama a la función para obtener información de todas las películas en el JSON
+    fetchMoviesData()
+      .then(movieDataArray => {
+        console.log(movieDataArray);
+      })
+      .catch(error => {
+        console.error('Error al obtener información de las películas:', error);
+      });
 
+    //Colocando cada Título
+    const movies = moviesJSON;
+    for (let i = 0; i < movies.length; i++) {
+      const movieTitle = movies[i].Name;
+      const containerId = `movieT${i + 1}`;
+      const container = document.getElementById(containerId);
+    
+      if (container) {
+        container.innerHTML = movieTitle; // Asigna el título al contenido del contenedor
+      }
+    }
 
     // ----- FETCH API THE MOVIE DB
     async function fetchMovie(movieTitle){
