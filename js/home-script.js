@@ -14,43 +14,49 @@ $(document).ready(function() {
     const cinemeTitle = document.querySelector(".cineme-title"); //Title
 
     // ----- SHOWING INFO
-    //Recorriendo JSON + Fetch de cada película
-    async function fetchMoviesData() {
-      const movies = moviesJSON;
-      const movieDataArray = [];
-    
-      for (const movie of movies) {
-        const movieTitle = movie.Name;
-        const movieData = await fetchMovie(movieTitle);
-        
-        if (movieData) {
-          movieDataArray.push(movieData);
-        }
-      }
-    
-      return movieDataArray;
-    }
-    
-    // Llama a la función para obtener información de todas las películas en el JSON
-    fetchMoviesData()
-      .then(movieDataArray => {
-        console.log(movieDataArray);
-      })
-      .catch(error => {
-        console.error('Error al obtener información de las películas:', error);
-      });
-
-    //Colocando cada Título
+    //Título
     const movies = moviesJSON;
     for (let i = 0; i < movies.length; i++) {
       const movieTitle = movies[i].Name;
       const containerId = `movieT${i + 1}`;
       const container = document.getElementById(containerId);
-    
-      if (container) {
-        container.innerHTML = movieTitle; // Asigna el título al contenido del contenedor
+      if (movieTitle.length > 25) {
+        const movieTitleCrop = movieTitle.substring(0, 20) + '...';
+        if (container) {
+          container.innerHTML = movieTitleCrop; // Asigna el título al contenido del contenedor
+        }
+      }else{
+        if (container) {
+          container.innerHTML = movieTitle; // Asigna el título al contenido del contenedor
+        }
       }
     }
+
+    //Poster
+    async function loadPosters() {
+      // Recorre los elementos <rect> con IDs movieP1, movieP2, etc.
+      for (let i = 1; i <= 12; i++) {
+        const rectId =  `movieP${i}`;;
+        const rect = document.getElementById(rectId);
+        const movieTitle = moviesJSON[i - 1].Name; // Obtiene el nombre de la película desde el JSON
+        const imagenURL = await getPoster(movieTitle); // Obtiene la URL del póster utilizando la función getPoster()
+
+        // Crea un elemento <image>
+        const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+
+        // Establece los atributos del elemento <image>
+        imagen.setAttribute('x', rect.getAttribute('x'));
+        imagen.setAttribute('y', rect.getAttribute('y'));
+        imagen.setAttribute('width', rect.getAttribute('width'));
+        imagen.setAttribute('height', rect.getAttribute('height'));
+        imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
+
+        // Adjunta el elemento <image> como hijo del <rect>
+        rect.appendChild(imagen);
+      }
+    }
+    loadPosters();
+
 
     // ----- FETCH API THE MOVIE DB
     async function fetchMovie(movieTitle){
@@ -72,6 +78,7 @@ $(document).ready(function() {
         //console.log(movieTitle);
         return {
           title : movieTitle,
+          poster_path : "/wjOHjWCUE0YzDiEzKv8AfqHj3ir.jpg",
           genre_ids: [0]
         };
       }
