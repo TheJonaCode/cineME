@@ -14,28 +14,49 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i" rel="stylesheet">
 </head>
 
-<body style="background-color: #0b132b;">
+<body style="background-color: #f4f6f6;">
+    <div class="contenedor">
+        <!--NAVBAR-->
+        <div class="navbar">
+        </div>
 
-   <div class="instructions">
-    <div class="uploadFile">
-        <label for="custom-file-upload" class="filupp">
-            <span class="filupp-file-name js-value">SELECT FILE</span>
-            <input type="file" name="attachment-file" value="1" id="custom-file-upload csvFileInput"/>
-        </label>
-        <!-- Cargar el archivo CSV -->
-        <input type="file" class="file" id="csvFileInput">
-    </div>
-    <div class="howitworks">
-        <p class="howitworks-text">How it works?</p>
-    </div>
-   </div>
+        <!--EXAMPLE-->
+        <div class="example">
+        </div>
 
-    <div class="footer">
-        <p class="footer__description">
-            cineME 2023
-            <br>
-            All Rights Reserved
-        </p>
+        <!--INSTRUCTIONS-->
+        <div class="instructions">
+            <div class="uploadFile">
+                <label class="filupp">
+                    <span class="input-title">SELECT FILE</span>
+                    <input type="file" id="csvFileInput"/>
+                </label>
+                <!-- Cargar el archivo CSV -->
+                <input type="file" class="file" id="csvFileInput">
+            </div>
+            <div class="howitworks">
+                <p class="howitworks-title">How it works?</p>
+                <p class="howitworks-subtitle">
+                    1.Go to Letterboxd > Settings > Data > Export Your Data
+                </p>
+                <p class="howitworks-subtitle">
+                    2.Unzip your file, locate the list you'll be select (Lists > YourList.csv)
+                </p>
+                <p class="howitworks-subtitle">
+                    3.Press the button above ("Select File") and select your file 
+                </p>
+            </div>
+        </div>
+
+        <!--FOOTER-->
+        <div class="footer">
+            <p class="footer__description">
+                Made by <span class="footer-user">TheJonaCode</span>
+            </p>
+            <p class="footer__description">
+                cineME 2023. All Rights Reserved
+            </p>
+        </div>
     </div>
 
     <!--SCRIPTS JS-->
