@@ -20,11 +20,28 @@
 		<!--NAVBAR-->
         <div class="navbar">
         </div>
+		
+		<!--MOD RESULTS-->
+		<div class="mod-results">
+			<div class="mod-user">
+				<p class="mod-text">Your Name:</p>
+				<input type="text" class="form-control mod-input" id="nameInput" placeholder="Your Name">
+			</div>
+			<div class="mod-movie">
+				<p class="mod-text">Change a movie</p>
+				<p class="mod-subtext">If your movie is not show it, you can change it.</p>
+				<div class="mod-controls">
+					<input type="number" min="1" max="12" class="form-control mod-input" id="posterInput" placeholder="Number">
+					<input type="text" class="form-control mod-input" id="movieInput" placeholder="Movie Title">
+				</div>
+				<button class="btn btn-primary"> Refresh </button>
+			</div>
+		</div>
 
+		<!--VISUAL-->
 		<p class="results">
 			Your own cinema:
 		</p>
-		<!--VISUAL-->
 		<div class="visual">
 			<!--SVG-->
 			<svg class="svg-space">

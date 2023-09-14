@@ -11,7 +11,7 @@ $(document).ready(function() {
           
     // ----- DOM ELEMENTS
     //Title cineME
-    const cinemeTitle = document.querySelector(".cineme-title"); //Title
+    const cinemeUser = document.querySelector(".cineme-user"); //Title
 
     // ----- SHOWING INFO
     //Título
