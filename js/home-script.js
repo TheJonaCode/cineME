@@ -34,10 +34,13 @@ $(document).ready(function() {
 
     //Poster
     async function loadPosters() {
-      // Recorre los elementos <rect> con IDs movieP1, movieP2, etc.
+      // Recorre los elementos <rect> con IDs movieDiv1, movieDivP2, etc.
+      // Recorre los elementos <g> con IDs movieP, movieP2, etc.
       for (let i = 1; i <= 12; i++) {
-        const rectId =  `movieP${i}`;;
+        const rectId =  `movieP${i}`;
+        const groupId =  `movieDiv${i}`;
         const rect = document.getElementById(rectId);
+        const group = document.getElementById(groupId);
         const movieTitle = moviesJSON[i - 1].Name; // Obtiene el nombre de la película desde el JSON
         const imagenURL = await getPoster(movieTitle); // Obtiene la URL del póster utilizando la función getPoster()
 
@@ -52,7 +55,7 @@ $(document).ready(function() {
         imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
 
         // Adjunta el elemento <image> como hijo del <rect>
-        rect.appendChild(imagen);
+        group.appendChild(imagen);
       }
     }
     loadPosters();
