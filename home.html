@@ -25,16 +25,16 @@
 		<div class="mod-results">
 			<div class="mod-user">
 				<p class="mod-text">Your Name:</p>
-				<input type="text" class="form-control mod-input" id="nameInput" placeholder="Your Name">
+				<input type="text" class="form-control mod-input" id="usernameInput" placeholder="Your Name">
 			</div>
 			<div class="mod-movie">
 				<p class="mod-text">Change a movie</p>
 				<p class="mod-subtext">If your movie is not show it, you can change it.</p>
 				<div class="mod-controls">
-					<input type="number" min="1" max="12" class="form-control mod-input" id="posterInput" placeholder="Number">
-					<input type="text" class="form-control mod-input" id="movieInput" placeholder="Movie Title">
+					<input id="movie-number" type="number" min="1" max="12" class="form-control mod-input" placeholder="Number">
+					<input id="movie-title" type="text" class="form-control mod-input" placeholder="Movie Title">
 				</div>
-				<button class="btn btn-primary"> Refresh </button>
+				<button id="refresh-button" onclick="changeMovie()" class="btn btn-primary"> Refresh </button>
 			</div>
 		</div>
 
@@ -65,6 +65,13 @@
 					.st12{fill:#FFFFFF;}
 					.st13{font-family:'ErasITC-Bold';}
 					.st14{font-size:14px;}
+					.title-red{fill: #D80D34;}
+					.title-user{
+						font-family:'Poppins', sans-serif;
+						font-weight: bold;
+						font-size: 34px;
+						fill: #000000;
+					}
 				</style>
 				<g id="BG">
 					<rect x="0" y="158.45" class="st0" width="595.28" height="684.55"/>
@@ -509,7 +516,6 @@
 						</g>
 						<line class="st8" x1="61.23" y1="34.71" x2="549.38" y2="34.71"/>
 						<line class="st8" x1="61.23" y1="59.64" x2="549.38" y2="59.64"/>
-						<line class="st8" x1="61.23" y1="84.15" x2="549.38" y2="84.15"/>
 						<line class="st8" x1="61.23" y1="109.44" x2="549.38" y2="109.44"/>
 						<line class="st8" x1="61.23" y1="133.8" x2="549.38" y2="133.8"/>
 					</g>
@@ -664,7 +670,7 @@
 								L336.54,114.25z"/>
 						</g>
 					</g>
-					<g>
+					<g class="title-red">
 						<g>
 							<path d="M214.37,38.79h5.29l5.95,11.35l2.26,5.01h0.14c-0.24-2.41-0.66-5.61-0.66-8.3v-8.06h4.91V61.6h-5.29l-5.95-11.38
 								l-2.26-4.98h-0.14c0.24,2.52,0.66,5.57,0.66,8.26v8.1h-4.91V38.79z"/>
@@ -684,33 +690,8 @@
 								l-2.26-4.98h-0.14c0.24,2.52,0.66,5.57,0.66,8.26v8.1h-4.92V38.79z"/>
 						</g>
 					</g>
-					<g>
-						<g>
-							<path d="M179.85,91.36V77.37h5.89v14.59c0,5.1,1.61,6.87,4.52,6.87c2.93,0,4.62-1.76,4.62-6.87V77.37h5.68v13.99
-								c0,8.75-3.56,12.56-10.3,12.56S179.85,100.11,179.85,91.36z"/>
-							<path d="M204.91,100.15l3.38-4.04c1.85,1.61,4.26,2.72,6.4,2.72c2.46,0,3.66-0.97,3.66-2.52c0-1.64-1.48-2.17-3.76-3.1
-								l-3.39-1.44c-2.7-1.1-5.26-3.32-5.26-7.11c0-4.32,3.86-7.77,9.28-7.77c3,0,6.14,1.18,8.39,3.42l-2.97,3.71
-								c-1.72-1.32-3.35-2.04-5.41-2.04c-2.03,0-3.32,0.85-3.32,2.34c0,1.6,1.71,2.18,3.98,3.09l3.32,1.35
-								c3.18,1.29,5.17,3.41,5.17,7.09c0,4.33-3.61,8.08-9.82,8.08C211.18,103.92,207.57,102.64,204.91,100.15z"/>
-							<path d="M228.84,77.37h16.33v4.94h-10.44v5.23h8.89v4.94h-8.89v6h10.84v4.94h-16.73V77.37z"/>
-							<path d="M250.76,77.37h9.39c5.53,0,10.06,1.92,10.06,8.12c0,5.99-4.53,8.57-10.06,8.57h-3.49v9.38h-5.89V77.37z M259.67,89.38
-								c3.1,0,4.77-1.33,4.77-3.89c0-2.58-1.67-3.44-4.77-3.44h-3.01v7.33H259.67z M259.07,92.51l4.08-3.77l8.32,14.7h-6.59
-								L259.07,92.51z"/>
-							<path d="M275.03,86.79c2.4-1.18,3.61-2.72,3.61-5.09l-0.16-3.45l1.93,2.67c-0.6,0.48-1.35,0.86-2.16,0.86
-								c-1.69,0-3.07-1.12-3.07-2.93c0-2,1.28-3.27,3.07-3.27c2.46,0,3.76,1.92,3.76,5.22c0,3.77-1.86,6.67-5.69,8.56L275.03,86.79z"/>
-							<path d="M285.59,100.15l3.38-4.04c1.85,1.61,4.26,2.72,6.4,2.72c2.46,0,3.66-0.97,3.66-2.52c0-1.64-1.48-2.17-3.76-3.1
-								l-3.39-1.44c-2.7-1.1-5.26-3.32-5.26-7.11c0-4.32,3.86-7.77,9.28-7.77c3,0,6.14,1.18,8.39,3.42l-2.97,3.71
-								c-1.72-1.32-3.35-2.04-5.41-2.04c-2.03,0-3.32,0.85-3.32,2.34c0,1.6,1.71,2.18,3.98,3.09l3.32,1.35
-								c3.18,1.29,5.17,3.41,5.17,7.09c0,4.33-3.61,8.08-9.82,8.08C291.86,103.92,288.25,102.64,285.59,100.15z"/>
-							<path d="M317.52,77.37h6.04l6.8,12.96l2.58,5.73h0.16c-0.28-2.76-0.75-6.41-0.75-9.48v-9.21h5.62v26.07h-6.04l-6.8-13l-2.58-5.69
-								h-0.16c0.28,2.88,0.75,6.37,0.75,9.44v9.25h-5.62V77.37z"/>
-							<path d="M348.97,77.37h7.05l8.19,26.07h-6.24l-3.41-13.2c-0.72-2.61-1.42-5.69-2.12-8.41h-0.16c-0.63,2.75-1.33,5.8-2.05,8.41
-								l-3.42,13.2h-6.03L348.97,77.37z M346.18,92.65h12.54v4.58h-12.54V92.65z"/>
-							<path d="M367.04,77.37h6.43l4.23,11.58c0.52,1.54,0.98,3.21,1.5,4.81h0.16c0.52-1.6,0.96-3.27,1.49-4.81l4.1-11.58h6.43v26.07
-								H386v-9.57c0-2.54,0.48-6.33,0.75-8.86h-0.16l-2.14,6.17l-3.68,9.99h-3.27l-3.69-9.99l-2.08-6.17h-0.16
-								c0.28,2.52,0.75,6.32,0.75,8.86v9.57h-5.29V77.37z"/>
-							<path d="M397.52,77.37h16.33v4.94h-10.44v5.23h8.89v4.94h-8.89v6h10.84v4.94h-16.73V77.37z"/>
-						</g>
+					<g id="usernameSVG">
+						<text id="title-username" transform="matrix(1 0 0 1 190 100)" class="title-red title-user">USER'S NAME</text>
 					</g>
 				</g>
 				</svg>
