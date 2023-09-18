@@ -122,7 +122,7 @@ $(document).ready(function() {
   //DOM ELEMENTS
   const chMovieNumber = document.querySelector("#movie-number"); //Movie Number Input
   const chMovieTitle = document.querySelector("#movie-title"); //Movie Title Input
-  const refreshButton = document.querySelector("#refresh-button"); //Rfresh Button
+  //const refreshButton = document.querySelector("#refresh-button"); //Refresh Button
 
   async function changeMovie(){
     if(chMovieNumber != '' || chMovieTitle != ''){
@@ -136,23 +136,44 @@ $(document).ready(function() {
       newMovieTitle.innerHTML = newTitle;
       const imagenURL = await getPoster(newMovie); // Obtiene la URL del póster utilizando la función getPoster()
 
-       // Crea un elemento <image>
-       const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+      //createImage(newMoviePoster, newMovieDimensions, imagenURL)
+      // Crea un elemento <image>
+      const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 
-       // Establece los atributos del elemento <image>
-       imagen.setAttribute('x', newMovieDimensions.getAttribute('x'));
-       imagen.setAttribute('y', newMovieDimensions.getAttribute('y'));
-       imagen.setAttribute('width', newMovieDimensions.getAttribute('width'));
-       imagen.setAttribute('height', newMovieDimensions.getAttribute('height'));
-       imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
+      // Establece los atributos del elemento <image>
+      imagen.setAttribute('x', newMovieDimensions.getAttribute('x'));
+      imagen.setAttribute('y', newMovieDimensions.getAttribute('y'));
+      imagen.setAttribute('width', newMovieDimensions.getAttribute('width'));
+      imagen.setAttribute('height', newMovieDimensions.getAttribute('height'));
+      imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
 
-       // Eliminar hijos existentes
-       newMoviePoster.removeChild();
-       // Adjunta el elemento <image> como hijo del <g> (Group)
-       newMoviePoster.appendChild(imagen);
+      // Eliminar hijos existentes
+      newMoviePoster.removeChild();
+      // Adjunta el elemento <image> como hijo del <g> (Group)
+      newMoviePoster.appendChild(imagen);
     }
   }
-
   changeMovie();
+
+  function createImage(groupPoster, rectDimensions, imagenURL){
+    //groupPoster: <g> donde se muestra el poster
+    //rectDimensions: <rect> superior para obtener las dimensiones y ubicación x, y 
+    //imagenURL: url del poster a mostrarse
+    
+    // Crea un elemento <image>
+    const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+
+    // Establece los atributos del elemento <image>
+    imagen.setAttribute('x', rectDimensions.getAttribute('x'));
+    imagen.setAttribute('y', rectDimensions.getAttribute('y'));
+    imagen.setAttribute('width', rectDimensions.getAttribute('width'));
+    imagen.setAttribute('height', rectDimensions.getAttribute('height'));
+    imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
+
+    // Eliminar hijos existentes
+    groupPoster.removeChild();
+    // Adjunta el elemento <image> como hijo del <g> (Group)
+    groupPoster.appendChild(imagen);
+  }
 
 });

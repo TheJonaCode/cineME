@@ -130,12 +130,12 @@ body {
  }
 
  /*MOD-USER*/
-#nameInput, #movieInput, #posterInput{
+#usernameInput, #movie-title, #movie-number{
     font-size: 14px;
  }
 
-#nameInput:focus {
-    background-color: #000;
+#usernameInput:focus {
+    /*background-color: #57cc99;*/
 }
 
  /*MOD-MOVIE*/
@@ -147,11 +147,11 @@ body {
     display: flex;
  }
 
- #posterInput{
+ #movie-number{
     width: 30%;
  }
  
- #movieInput{
+ #movie-title{
     width: 68%;
     margin-left: 2%;
  }
