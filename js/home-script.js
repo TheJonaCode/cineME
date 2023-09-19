@@ -129,38 +129,45 @@ $(document).ready(function() {
   //DOM ELEMENTS
   const chMovieNumber = document.querySelector("#movie-number"); //Movie Number Input
   const chMovieTitle = document.querySelector("#movie-title"); //Movie Title Input
-  //const refreshButton = document.querySelector("#refresh-button"); //Refresh Button
+  const refreshButton = document.querySelector("#refresh-button"); //Refresh Button
 
-  async function changeMovie(){
-    if(chMovieNumber != '' || chMovieTitle != ''){
-      //ALERT
+  refreshButton.addEventListener("click", function() {
+    console.log('NUMBER: ' + chMovieNumber.value);
+    console.log('TITLE: ' + chMovieTitle.value);
+    
+    if(chMovieNumber == '' || chMovieTitle == ''){
+      //TODO: ALERT
+      console.log('Ingresa una película y el num donde irá ubicada');
     }else{
-      const newMovieTitle = document.querySelector(`movieT${chMovieNumber}`);
-      const newMoviePoster = document.querySelector(`movieP${chMovieNumber}`); //POSTER
-      const newMovieDimensions = document.querySelector(`movieDiv${chMovieNumber}`); //OBTENER DIMENSIONES Y UBICACIÓN
+      const newMovieTitle = document.querySelector(`#movieT${chMovieNumber.value}`);
+      const newMoviePoster = document.querySelector(`#movieP${chMovieNumber.value}`); //POSTER
+      const newMovieDimensions = document.querySelector(`#movieDiv${chMovieNumber.value}`); //OBTENER DIMENSIONES Y UBICACIÓN
+
       //FECTH
-      newMovie = fetchMovie(chMovieTitle).movieTitle;
-      newMovieTitle.innerHTML = newTitle;
-      const imagenURL = await getPoster(newMovie); // Obtiene la URL del póster utilizando la función getPoster()
+      const newMovie = fetchMovie(chMovieTitle.value).movieTitle;
+      newMovieTitle.innerHTML = newMovie;
+      const posterurl = 'https://image.tmdb.org/t/p/w500';
+      const newPosterPath = fetchMovie(newMovie).poster_path;
+      const newPoster = posterurl + newPosterPath;
+      //const imagenURL = await getPoster(newMovie); // Obtiene la URL del póster utilizando la función getPoster()
+      const imagenURL = newPoster;
 
-      //createImage(newMoviePoster, newMovieDimensions, imagenURL)
-      // Crea un elemento <image>
-      const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+       // Crea un elemento <image>
+       const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 
-      // Establece los atributos del elemento <image>
-      imagen.setAttribute('x', newMovieDimensions.getAttribute('x'));
-      imagen.setAttribute('y', newMovieDimensions.getAttribute('y'));
-      imagen.setAttribute('width', newMovieDimensions.getAttribute('width'));
-      imagen.setAttribute('height', newMovieDimensions.getAttribute('height'));
-      imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
+       // Establece los atributos del elemento <image>
+       imagen.setAttribute('x', newMovieDimensions.getAttribute('x'));
+       imagen.setAttribute('y', newMovieDimensions.getAttribute('y'));
+       imagen.setAttribute('width', newMovieDimensions.getAttribute('width'));
+       imagen.setAttribute('height', newMovieDimensions.getAttribute('height'));
+       imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
 
-      // Eliminar hijos existentes
-      newMoviePoster.removeChild();
-      // Adjunta el elemento <image> como hijo del <g> (Group)
-      newMoviePoster.appendChild(imagen);
-    }
-  }
-  changeMovie();
+       // Eliminar hijos existentes
+       newMoviePoster.removeChild();
+       // Adjunta el elemento <image> como hijo del <g> (Group)
+       newMoviePoster.appendChild(imagen);
+      }
+    });
 
   function createImage(groupPoster, rectDimensions, imagenURL){
     //groupPoster: <g> donde se muestra el poster
