@@ -105,17 +105,24 @@ $(document).ready(function() {
 
   //CHANGE USERNAME SVG
   function changeUsername() {
-    //console.log(inputUser.value);
+    inputUser.addEventListener('keyup', () => {
+    console.log(inputUser.value);
     if(inputUser.value == ''){
-      cinemeUser.innerHTML = `USER'SNAME`;
+      cinemeUser.innerHTML = `USER'S NAME`;
+      cinemeUser.setAttribute('transform', "matrix(1 0 0 1 190 100)");
     }else{
-      //TODO: TO UPPERCASE + MAX VALUE INPUT (20)
-      cinemeUser.innerHTML = inputUser.value;
-      if(inputUser.length > 8){
-        cinemeUser.setAttribute('transform', "matrix(1 0 0 1 180 100)");
+      cinemeUser.innerHTML = inputUser.value.toUpperCase();
+      if(inputUser.value.length == 1){
+        cinemeUser.setAttribute('transform', "matrix(1 0 0 1 290 100)");
+      }else{
+          var defVal = 290;
+          var inputLength = 10 * (inputUser.value.length -1);
+          var dimX = defVal - inputLength;
+          //console.log(dimX);
+          cinemeUser.setAttribute('transform', `matrix(1 0 0 1 ${dimX} 100)`);
       }
     }
-  }
+  })}
   changeUsername();
 
   // CHANGE A MOVIE
