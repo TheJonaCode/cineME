@@ -8,6 +8,28 @@ $(document).ready(function() {
   const moviesJSON = JSON.parse(decodedData);
   console.log(moviesJSON);
 
+  // ----- NAVBAR CONTROLS
+  //DOM ELEMENTS
+  const navInfo = document.querySelector(".nav-title"); //Navbar Info
+  const navTitle = document.querySelector(".nav-info"); //Navbar Title cineME
+
+  //Info
+  navInfo.addEventListener("click", function() {
+    /*TODO: Info Modal
+    With cineME you can get your own cinema based it on your favorite movies.
+    Log in into you Letterboxd account and choose one of your list (12 movies),
+    export your data and choose your csv file to get a image with your cinema, you'll be able to download oh share it on the social media that you prefer.
+    Website made by TheJonaCode
+    More of my projects: https://devjonathanperez.netlify.app/
+    cineME Repository: https://github.com/TheJonaCode/cineME
+    */
+  });
+
+  //Title
+  navTitle.addEventListener("click", function() {
+    window.location.href = 'index.html';
+  });
+
   // ----- SHOWING INFO
   //Título
   const movies = moviesJSON;
@@ -169,6 +191,7 @@ $(document).ready(function() {
       }
     });
 
+  //CREAR IMAGEN
   function createImage(groupPoster, rectDimensions, imagenURL){
     //groupPoster: <g> donde se muestra el poster
     //rectDimensions: <rect> superior para obtener las dimensiones y ubicación x, y 
@@ -189,5 +212,20 @@ $(document).ready(function() {
     // Adjunta el elemento <image> como hijo del <g> (Group)
     groupPoster.appendChild(imagen);
   }
+
+  // ----- DOWNLOAD & SHARE
+  //DOM ELEMENTS
+  const downloadbtn = document.querySelector(".btn-download"); //Download Button
+  const sharefb = document.querySelector(".share-fb"); //Share Facebook
+  const sharewa = document.querySelector(".share-wa"); //Share WhatsApp
+  const sharetw = document.querySelector(".share-tw"); //Share Twitter
+  const shareig = document.querySelector(".share-ig"); //Share Instagram
+
+  //Download
+  downloadbtn.addEventListener("click", function() {
+    console.log('DESCARGANDO...')
+  });
+
+  //TODO: Share - get class and share it on the social media that corresponds
 
 });
