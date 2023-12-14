@@ -53,17 +53,17 @@ $(document).ready(function() {
   async function loadPosters() {
     // Recorre los elementos <rect> con IDs movieDiv1, movieDivP2, etc.
     // Recorre los elementos <g> con IDs movieP, movieP2, etc.
-    for (let i = 1; i <= 12; i++) {
-      const groupId =  `movieP${i}`; //AQUÍ VA EL POSTER
+    for (let i = 1; i <= movies.length; i++) {
+      const groupId =  `movieP${i}`; //AQUÍ VA EL POSTER (IMAGEN)
       const rectId =  `movieDiv${i}`; //DE AQUÍ OBTIENE DIMENSIONES Y UBICACIÓN
       const rect = document.getElementById(rectId);
       const group = document.getElementById(groupId);
       const movieTitle = moviesJSON[i - 1].Name; // Obtiene el nombre de la película desde el JSON
       const imagenURL = await getPoster(movieTitle); // Obtiene la URL del póster utilizando la función getPoster()
-
+      
       // Crea un elemento <image>
       const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-
+     
       // Establece los atributos del elemento <image>
       imagen.setAttribute('x', rect.getAttribute('x'));
       imagen.setAttribute('y', rect.getAttribute('y'));
@@ -77,14 +77,13 @@ $(document).ready(function() {
   }
   loadPosters();
 
-
   // ----- FETCH API THE MOVIE DB
   async function fetchMovie(movieTitle){
     const options = {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNTk5MjRlZmVmMmZhZTZmYjM2ODUwMzk5YWI5YjEwZCIsInN1YiI6IjVmOGNmN2U5ZWZkM2MyMDAzNjNkZjE5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZPxtN7CeIJC14QaE0ktztv1JoKWuq7sFRoX6cgPQTEs'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYThmZDg3MzY1Nzg3YTA4YmY2YzY5ZGZkODlmZWFjOCIsInN1YiI6IjVmOGNmN2U5ZWZkM2MyMDAzNjNkZjE5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.AJfug_P0sWeef_HU0KXKHy54BfaaEvru6ZpGR8eNNnM'
       }
     };
 
@@ -116,7 +115,7 @@ $(document).ready(function() {
     //console.log('POSTER: ' + moviePoster);
     return moviePoster;
   }
-  //getPoster('Back To The Future');
+  //getPoster('Babylon');
 
   // ----- MODIFICAR SVG
   // USERNAME
@@ -157,37 +156,41 @@ $(document).ready(function() {
     console.log('NUMBER: ' + chMovieNumber.value);
     console.log('TITLE: ' + chMovieTitle.value);
     
-    if(chMovieNumber == '' || chMovieTitle == ''){
+    if(chMovieNumber == '' || chMovieTitle == '' || chMovieNumber == null || chMovieTitle == null){
       //TODO: ALERT
       console.log('Ingresa una película y el num donde irá ubicada');
     }else{
       const newMovieTitle = document.querySelector(`#movieT${chMovieNumber.value}`);
       const newMoviePoster = document.querySelector(`#movieP${chMovieNumber.value}`); //POSTER
       const newMovieDimensions = document.querySelector(`#movieDiv${chMovieNumber.value}`); //OBTENER DIMENSIONES Y UBICACIÓN
-
+      
       //FECTH
-      const newMovie = fetchMovie(chMovieTitle.value).movieTitle;
-      newMovieTitle.innerHTML = newMovie;
-      const posterurl = 'https://image.tmdb.org/t/p/w500';
-      const newPosterPath = fetchMovie(newMovie).poster_path;
-      const newPoster = posterurl + newPosterPath;
-      //const imagenURL = await getPoster(newMovie); // Obtiene la URL del póster utilizando la función getPoster()
-      const imagenURL = newPoster;
+      async function changingAMovie(){
+        const newFetchMovie = await fetchMovie(chMovieTitle.value);
+        const newMovie = newFetchMovie.original_title;
+        newMovieTitle.innerHTML = newMovie;
+        const posterurl = 'https://image.tmdb.org/t/p/w500';
+        const newPosterPath = newFetchMovie.poster_path;
+        const newPoster = posterurl + newPosterPath;
+        //const imagenURL = await getPoster(newMovie); // Obtiene la URL del póster utilizando la función getPoster()
+        const imagenURL = newPoster;
 
-       // Crea un elemento <image>
-       const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+        // Crea un elemento <image>
+        const imagen = document.createElementNS('http://www.w3.org/2000/svg', 'image');
 
-       // Establece los atributos del elemento <image>
-       imagen.setAttribute('x', newMovieDimensions.getAttribute('x'));
-       imagen.setAttribute('y', newMovieDimensions.getAttribute('y'));
-       imagen.setAttribute('width', newMovieDimensions.getAttribute('width'));
-       imagen.setAttribute('height', newMovieDimensions.getAttribute('height'));
-       imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
+        // Establece los atributos del elemento <image>
+        imagen.setAttribute('x', newMovieDimensions.getAttribute('x'));
+        imagen.setAttribute('y', newMovieDimensions.getAttribute('y'));
+        imagen.setAttribute('width', newMovieDimensions.getAttribute('width'));
+        imagen.setAttribute('height', newMovieDimensions.getAttribute('height'));
+        imagen.setAttribute('href', imagenURL); // Agrega la URL de la imagen
 
-       // Eliminar hijos existentes
-       newMoviePoster.removeChild();
-       // Adjunta el elemento <image> como hijo del <g> (Group)
-       newMoviePoster.appendChild(imagen);
+        // Eliminar hijos existentes
+        //newMoviePoster.removeChild(image);
+        // Adjunta el elemento <image> como hijo del <g> (Group)
+        newMoviePoster.appendChild(imagen);
+        }
+        changingAMovie();
       }
     });
 
@@ -226,6 +229,9 @@ $(document).ready(function() {
     console.log('DESCARGANDO...')
   });
 
-  //TODO: Share - get class and share it on the social media that corresponds
+  /*TODO: Share - get class and share it on the social media that corresponds
+  My own cinema! [Add Emojis]
+  Maked it by cineME. Make yours here: cineme.netlify.app/  
+  */
 
 });

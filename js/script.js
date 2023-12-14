@@ -38,5 +38,5 @@ $(document).ready(function() {
         const titleAsString = title.toString(); // Convertir a cadena
         return titleAsString.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
-
+ 
 });
